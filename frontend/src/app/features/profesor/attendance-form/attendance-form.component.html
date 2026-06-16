@@ -1,0 +1,64 @@
+<section class="attendance">
+  <header class="attendance__header">
+    <button type="button" class="link-back" (click)="goBack()">&larr; Volver a secciones</button>
+    <div class="attendance__title">
+      <h1>{{ section?.name || 'Sección' }}</h1>
+      <span class="muted">{{ section?.gradeName }} &middot; {{ today }}</span>
+    </div>
+  </header>
+
+  <p *ngIf="loading" class="muted">Cargando estudiantes&hellip;</p>
+
+  <ng-container *ngIf="!loading && section">
+    <p *ngIf="alreadyRecorded && !successMessage" class="info">
+      Esta sección ya tiene asistencia registrada hoy. Puede modificar el estado de cada estudiante.
+    </p>
+
+    <ul class="student-list" data-test="student-list">
+      <li *ngFor="let student of section.students" class="student-row">
+        <span class="student-row__name">{{ student.fullName }}</span>
+        <div class="status-buttons" role="group" [attr.aria-label]="'Estado de ' + student.fullName">
+          <button
+            type="button"
+            class="status-btn status-btn--present"
+            [class.is-active]="getStatus(student.id) === 'PRESENT'"
+            (click)="setStatus(student.id, 'PRESENT')"
+          >
+            Presente
+          </button>
+          <button
+            type="button"
+            class="status-btn status-btn--absent"
+            [class.is-active]="getStatus(student.id) === 'ABSENT'"
+            (click)="setStatus(student.id, 'ABSENT')"
+          >
+            Ausente
+          </button>
+          <button
+            type="button"
+            class="status-btn status-btn--late"
+            [class.is-active]="getStatus(student.id) === 'LATE'"
+            (click)="setStatus(student.id, 'LATE')"
+          >
+            Tardanza
+          </button>
+        </div>
+      </li>
+    </ul>
+
+    <div class="attendance__actions">
+      <button
+        type="button"
+        class="btn-primary"
+        data-test="save-button"
+        [disabled]="!isDirty || isSaving"
+        (click)="save()"
+      >
+        {{ isSaving ? 'Guardando…' : 'Guardar' }}
+      </button>
+    </div>
+
+    <p *ngIf="successMessage" class="message message--success">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="message message--error">{{ errorMessage }}</p>
+  </ng-container>
+</section>

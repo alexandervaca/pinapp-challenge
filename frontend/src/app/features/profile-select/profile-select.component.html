@@ -1,0 +1,20 @@
+<section class="profile-select">
+  <header class="profile-select__header">
+    <h1>Asistec</h1>
+    <p>Sistema de Asistencia Escolar — Innova Schools</p>
+  </header>
+
+  <div class="profile-select__grid">
+    <button type="button" class="profile-card profile-card--profesor" (click)="selectProfesor()">
+      <span class="profile-card__icon" aria-hidden="true">PR</span>
+      <h2>Profesor</h2>
+      <p>Registrar asistencia de mi sección.</p>
+    </button>
+
+    <button type="button" class="profile-card profile-card--coordinador" (click)="selectCoordinador()">
+      <span class="profile-card__icon" aria-hidden="true">CO</span>
+      <h2>Coordinador</h2>
+      <p>Consultar reportes y secciones pendientes.</p>
+    </button>
+  </div>
+</section>

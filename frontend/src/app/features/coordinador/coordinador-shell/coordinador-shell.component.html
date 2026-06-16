@@ -1,0 +1,17 @@
+<section class="coordinador-shell">
+  <header class="coordinador-shell__header">
+    <div>
+      <a routerLink="/" class="link-back">&larr; Cambiar perfil</a>
+      <h1>Panel del Coordinador</h1>
+    </div>
+    <nav class="coordinador-shell__tabs">
+      <a routerLink="resumen" routerLinkActive="is-active">Resumen del día</a>
+      <a routerLink="historial" routerLinkActive="is-active">Historial</a>
+      <a routerLink="pendientes" routerLinkActive="is-active">Pendientes</a>
+    </nav>
+  </header>
+
+  <main class="coordinador-shell__content">
+    <router-outlet></router-outlet>
+  </main>
+</section>

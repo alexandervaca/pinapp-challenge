@@ -1,0 +1,44 @@
+<section class="summary">
+  <header class="summary__header">
+    <div>
+      <h1>Resumen del día</h1>
+      <p class="muted">Fecha: {{ today }}</p>
+    </div>
+    <div class="summary__refresh" aria-live="polite">
+      Próxima actualización en <strong>{{ secondsToRefresh }}s</strong>
+    </div>
+  </header>
+
+  <p *ngIf="loading" class="muted">Cargando resumen&hellip;</p>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <table *ngIf="!loading && !errorMessage" class="summary-table" data-test="summary-table">
+    <thead>
+      <tr>
+        <th>Sección</th>
+        <th>Grado</th>
+        <th>Presentes</th>
+        <th>Ausentes</th>
+        <th>Tardanzas</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of summaries; trackBy: trackById">
+        <td>{{ row.sectionId || row.sectionName  }}</td>
+        <td>{{ row.sectionName || '-' }}</td>
+        <td class="num">{{ row.present }}</td>
+        <td class="num">{{ row.absent }}</td>
+        <td class="num">{{ row.late }}</td>
+        <td>
+          <span [class]="row.recorded ? 'pill pill--ok' : 'pill pill--pending'">
+            {{ row.recorded ? 'Registrada' : 'Pendiente' }}
+          </span>
+        </td>
+      </tr>
+      <tr *ngIf="summaries.length === 0">
+        <td colspan="6" class="muted center">Sin secciones cargadas.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>

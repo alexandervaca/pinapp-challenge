@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ng version *)",
+      "Bash(npm --version)",
+      "Bash(cd /tmp)",
+      "Bash(npx --yes @angular/cli@17 new frontend-tmp --routing --style=scss --skip-git --skip-install --defaults)",
+      "Bash(rm -rf /tmp/frontend-tmp)",
+      "Bash(npx --yes @angular/cli@17 new frontend-tmp --routing --style=scss --skip-git --skip-install --standalone=false --ssr=false --defaults)",
+      "Read(//tmp/**)",
+      "Bash(cp -r . \"G:/dev/workspace-intelj/pinapp-challenge/frontend/\")",
+      "Bash(npm install *)",
+      "Bash(npx ng *)",
+      "Bash(npx tsc *)",
+      "Bash(rm -rf src/main/java/com/innova/asistec/adapter)",
+      "Bash(rm -rf src/main/java/com/innova/asistec/config)",
+      "Bash(rm -rf src/main/java/com/innova/asistec/domain/port)",
+      "Bash(rm -rf src/main/java/com/innova/asistec/domain/service)",
+      "Bash(rm -rf src/test/java/com/innova/asistec/adapter)",
+      "Bash(./mvnw -q -DskipTests=false test)",
+      "Read(//c/dev/JDKs//**)",
+      "Read(//c/dev/**)",
+      "Bash(export JAVA_HOME=\"/c/dev/JDKs/jdk-17.0.1\")",
+      "Bash(export PATH=\"$JAVA_HOME/bin:$PATH\")",
+      "Bash(java -version)",
+      "Bash(./mvnw -q -DskipTests test)",
+      "Bash(./mvnw -DskipTests=true compile)"
+    ]
+  }
+}

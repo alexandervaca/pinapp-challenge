@@ -1,0 +1,22 @@
+<section class="pending">
+  <header>
+    <h1>Secciones pendientes</h1>
+    <p class="muted">Fecha: {{ today }}</p>
+  </header>
+
+  <p *ngIf="loading" class="muted">Cargando&hellip;</p>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <ng-container *ngIf="!loading && !errorMessage">
+    <p *ngIf="pending.length === 0" class="all-done">
+      Todas las secciones han registrado asistencia hoy.
+    </p>
+
+    <ul *ngIf="pending.length > 0" class="pending-list">
+      <li *ngFor="let row of pending; trackBy: trackById">
+        <strong>{{ row.sectionName || row.sectionId }}</strong>
+        <span class="muted">{{ row.gradeName }}</span>
+      </li>
+    </ul>
+  </ng-container>
+</section>

@@ -1,0 +1,29 @@
+<section class="section-select">
+  <header class="section-select__header">
+    <button type="button" class="link-back" (click)="goBack()">&larr; Cambiar perfil</button>
+    <h1>Elegí tu sección</h1>
+    <p>Seleccioná la sección para registrar la asistencia del día.</p>
+  </header>
+
+  <p *ngIf="loading" class="muted">Cargando secciones&hellip;</p>
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <div *ngIf="!loading && !errorMessage" class="section-select__groups">
+    <article *ngFor="let group of groups" class="grade-group">
+      <h2 class="grade-group__title">{{ group.gradeName }}</h2>
+      <div class="grade-group__sections">
+        <button
+          *ngFor="let section of group.sections"
+          type="button"
+          class="section-card"
+          (click)="open(section)"
+        >
+          <span class="section-card__name">{{ section.name }}</span>
+          <span class="section-card__count">{{ section.students.length }} estudiantes</span>
+        </button>
+      </div>
+    </article>
+
+    <p *ngIf="groups.length === 0" class="muted">No hay secciones disponibles.</p>
+  </div>
+</section>

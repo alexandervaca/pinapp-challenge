@@ -1,0 +1,55 @@
+<section class="history">
+  <header>
+    <h1>Historial de estudiante</h1>
+    <p class="muted">Consultá la asistencia individual en un rango de fechas.</p>
+  </header>
+
+  <form class="history__form" (ngSubmit)="search()">
+    <label>
+      <span>Estudiante</span>
+      <select [(ngModel)]="selectedStudentId" name="studentId" [disabled]="loadingStudents">
+        <option value="" disabled>Seleccionar&hellip;</option>
+        <option *ngFor="let student of students" [value]="student.id">
+          {{ student.fullName }} ({{ student.sectionName }})
+        </option>
+      </select>
+    </label>
+
+    <label>
+      <span>Desde</span>
+      <input type="date" [(ngModel)]="fromDate" name="from" />
+    </label>
+
+    <label>
+      <span>Hasta</span>
+      <input type="date" [(ngModel)]="toDate" name="to" />
+    </label>
+
+    <button type="submit" class="btn-primary" [disabled]="!canSearch || loadingResults">
+      {{ loadingResults ? 'Consultando…' : 'Consultar' }}
+    </button>
+  </form>
+
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <table *ngIf="hasSearched && results.length > 0" class="history-table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Sección</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entry of results">
+        <td>{{ entry.date }}</td>
+        <td>{{ entry.sectionId }}</td>
+        <td><app-status-badge [status]="entry.status"></app-status-badge></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="hasSearched && results.length === 0 && !errorMessage" class="muted">
+    Sin registros para el período seleccionado.
+  </p>
+</section>
